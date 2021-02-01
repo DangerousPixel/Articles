@@ -56,10 +56,9 @@
         <form method="POST" action="{{route('article.show' , $post)}}">
             {{method_field('DELETE')}}
             {{ @csrf_field() }}
-            <div class="field">
-                <div class="control">
-
-                    <button type="submit" class="btn btn-danger ml-2" onclick="return confirm('Are you sure?')">Delete post</button>
+            <div class="field mt-2">
+                <div class="control offset-2 align-content-center">
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">☠ Delete post ☠</button>
                 </div>
             </div>
         </form>
