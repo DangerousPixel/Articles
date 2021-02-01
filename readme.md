@@ -5,5 +5,5 @@
 * users can delete / edit articles
 * users can comment in articles
 * users can comment in articles
-  * users can edit their comments
+* users can edit their comments
 * users can like / dislike articles
