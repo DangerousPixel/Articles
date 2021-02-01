@@ -34,16 +34,16 @@
                         <label for="article" class="col-md-4 col-form-label">Article  </label>
                         <input id="article"
                                type="text"
-                               class="form-control{{ $errors->has('article') ? ' is-invalid' : '' }}"
+                               class=" form-control{{ $errors->has('article') ? ' is-invalid' : '' }} "
                                name="article"
                                value="{{ old('article') ?? $post->article }}"
-                               autocomplete="article" autofocus>
-
+                                  autocomplete="article" autofocus>
                         @if ($errors->has('article'))
                             <span class="invalid-feedback" role="alert">
                             <strong>{{ $errors->first('article') }}</strong>
                         </span>
                         @endif
+
                     </div>
 
                     <div class="row pt-4">

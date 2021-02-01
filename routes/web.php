@@ -19,6 +19,7 @@ Route::get('/', function () {
 });
 //authentication
 Auth::routes();
+//comments
 
 //articles
 route::post('/article' , 'PostController@store')->name('article.store');
