@@ -3,6 +3,8 @@
 * registration system
 * users can post articles
 * users can delete / edit articles
+  
+incoming features :
 * users can comment in articles
 * users can comment in articles
 * users can edit their comments
