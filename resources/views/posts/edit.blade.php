@@ -31,13 +31,13 @@
 
                     {{--  Article Field  --}}
                     <div class="form-group row">
-                        <label for="article" class="col-md-4 col-form-label">Article  </label>
+                        <label for="article" class="col-md-4 col-form-label">Article </label>
                         <input id="article"
                                type="text"
                                class=" form-control{{ $errors->has('article') ? ' is-invalid' : '' }} "
                                name="article"
                                value="{{ old('article') ?? $post->article }}"
-                                  autocomplete="article" autofocus>
+                               autocomplete="article" autofocus>
                         @if ($errors->has('article'))
                             <span class="invalid-feedback" role="alert">
                             <strong>{{ $errors->first('article') }}</strong>
@@ -58,7 +58,9 @@
             {{ @csrf_field() }}
             <div class="field mt-2">
                 <div class="control offset-2 align-content-center">
-                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">☠ Delete post ☠</button>
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">☠ Delete post
+                        ☠
+                    </button>
                 </div>
             </div>
         </form>

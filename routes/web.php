@@ -22,11 +22,11 @@ Auth::routes();
 //comments
 
 //articles
-route::post('/article' , 'PostController@store')->name('article.store');
-route::get('/article/create' , 'PostController@create')->name('article.create');
-route::get('/article/{post}/edit' , 'PostController@edit')->name('article.edit');
-route::patch('/article/{post}' , 'PostController@update')->name('article.update');
-route::get('/article/{post}' , 'PostController@show')->name('article.show');
+route::post('/article', 'PostController@store')->name('article.store');
+route::get('/article/create', 'PostController@create')->name('article.create');
+route::get('/article/{post}/edit', 'PostController@edit')->name('article.edit');
+route::patch('/article/{post}', 'PostController@update')->name('article.update');
+route::get('/article/{post}', 'PostController@show')->name('article.show');
 Route::DELETE('/article/{post}', 'PostController@destroy')->name('article.destroy');
 //profile
 Route::get('/home', 'ProfileController@index')->name('home');

@@ -10,7 +10,7 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-        protected static function boot()
+    protected static function boot()
     {
         parent::boot();
         static::created(function ($user) {
@@ -37,17 +37,21 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function profile() {
+    public function profile()
+    {
         return $this->hasOne(Profile::class);
     }
 
-    public function posts() {
-        return $this->hasMany(Post::class)->orderBy('created_at','DESC');
+    public function posts()
+    {
+        return $this->hasMany(Post::class)->orderBy('created_at', 'DESC');
     }
 
-    public function comments () {
-        return $this->hasMany(Comment::class)->orderBy('created_at','DESC');
+    public function comments()
+    {
+        return $this->hasMany(Comment::class)->orderBy('created_at', 'DESC');
     }
+
     /**
      * The attributes that should be cast to native types.
      *
@@ -56,8 +60,6 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
-
 
 
 }
