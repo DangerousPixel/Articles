@@ -20,6 +20,7 @@ Route::get('/', function () {
 //authentication
 Auth::routes();
 //comments
+route::post('/article/{post}' , 'CommentController@store')->name('comment.store');
 
 //articles
 route::post('/article', 'PostController@store')->name('article.store');
