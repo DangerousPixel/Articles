@@ -20,7 +20,7 @@ Route::get('/', function () {
 //authentication
 Auth::routes();
 //comments
-route::post('/article/{post}' , 'CommentController@store')->name('comment.store');
+//route::post('/article/{post}' , 'CommentController@store')->name('comment.store');
 
 //articles
 route::post('/article', 'PostController@store')->name('article.store');
@@ -31,7 +31,7 @@ route::get('/article/{post}', 'PostController@show')->name('article.show');
 Route::DELETE('/article/{post}', 'PostController@destroy')->name('article.destroy');
 //profile
 Route::get('/home', 'ProfileController@index')->name('home');
-Route::get('/profile/{user}', 'ProfileController@index')->name('profile.show');
+Route::get('/profile/{id}', 'ProfileController@index')->name('profile.show');
 Route::get('/profile/{user}/edit', 'ProfileController@edit')->name('profile.edit');
 Route::patch('/profile/{user}', 'ProfileController@update')->name('profile.update');
 

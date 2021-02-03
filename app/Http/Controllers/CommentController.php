@@ -35,14 +35,6 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        $data = request() -> validate ([
-            'comment' => 'required' ,
-        ]);
-        auth()->user()->comments()->create([
-            'comment' => $data['comment'],
-        ]);
-
-        return redirect('/profile/{post}'.post()->id);
     }
 
     /**
@@ -51,9 +43,8 @@ class CommentController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Comment $comment , Post $post)
+    public function show()
     {
-        return view('posts.show' , compact('comment' , 'post'));
     }
 
     /**
@@ -64,7 +55,6 @@ class CommentController extends Controller
      */
     public function edit(Comment $comment)
     {
-        return view('comments.edit' , compact('comment'));
     }
 
     /**
@@ -76,14 +66,6 @@ class CommentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = request() -> validate ([
-            'title' => 'required' ,
-            'article' => 'required' ,
-        ]);
-        $post->title = request('title');
-        $post->article = request('article');
-        $post->save();
-        return redirect(route('article.show'  , compact('post')));
     }
 
     /**

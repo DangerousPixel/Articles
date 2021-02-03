@@ -8,13 +8,10 @@
 
                 <div class="card">
                     <div class="card-header">
-                        <div> {{$user->username}} ⋮ have {{$user->posts->count()}} posts
+                        <div>  {{ $user->username }} ⋮ have {{$user->posts->count()}} posts
                             <div class="a"><a href="{{route('profile.edit',$user)}}"> edit profile</a></div>
                         </div>
-
-
                     </div>
-
                     <div class="card-body">
                         @if (session('status'))
                             <div class="alert alert-success" role="alert">

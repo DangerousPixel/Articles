@@ -13,10 +13,10 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
 
-        $user= auth()->user();
+        $user= User::where('id',$id)->firstOrFail();
         return view(('profiles.index') , compact('user'));
     }
 
