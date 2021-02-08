@@ -39,11 +39,11 @@ class CommentController extends Controller
         $data = request() -> validate ([
             'comment' => 'required | max:128' ,
         ]);
-        auth()->user()->comments()->create([
-            'comment' => $data['comment'],
-            'article_id' => $post,
-        ]);
-
+        $comment = new Comment();
+        $comment->user_id = auth()->user()->id;
+        $comment->article_id = $post->id;
+        $comment->comment = $data['comment'];
+        $comment->save();
         return redirect(route('article.show',$post));
     }
 
