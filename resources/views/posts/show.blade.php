@@ -11,7 +11,7 @@
         </div>
 
         <div class="mt-4 ml-lg-4 ">
-            <form action="{{ route('comment.store') , $comment }}" enctype="multipart/form-data" method="post">
+            <form action="{{route('comment.store',$post->id)}}" enctype="multipart/form-data" method="post">
                 @csrf
                 <h4>comment</h4>
                 <textarea class="d-flex" name="comment" id="comment" cols="100" rows="2"> Type a comment ... </textarea>
@@ -20,12 +20,12 @@
         </div>
 
         <div class="card mt-5 ml-3">
-            @foreach($user->comments as $comment)
-                <div class="card-header"> {{$user->username}} ⋮ <a href="">edit</a> ⋮ Created at</div>
-                <div class="card-body">
-                    <p>{{$comment->comment}}</p>
-                </div>
-            @endforeach
+{{--            @foreach($user->comments as $comment)--}}
+{{--                <div class="card-header"> {{$user->username}} ⋮ <a href="">edit</a> ⋮ Created at</div>--}}
+{{--                <div class="card-body">--}}
+{{--                    <p>{{$comment->comment}}</p>--}}
+{{--                </div>--}}
+{{--            @endforeach--}}
         </div>
     </div>
 

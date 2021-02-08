@@ -34,16 +34,17 @@ class CommentController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Comment $comment)
+    public function store(Post $post)
     {
         $data = request() -> validate ([
             'comment' => 'required | max:128' ,
         ]);
-        auth()->user()->comment()->create([
+        auth()->user()->comments()->create([
             'comment' => $data['comment'],
+            'article_id' => $post,
         ]);
 
-        return redirect('/profile/{post}');
+        return redirect(route('article.show',$post));
     }
 
     /**

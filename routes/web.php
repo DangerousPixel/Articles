@@ -21,9 +21,9 @@ Route::get('/', function () {
 Auth::routes();
 //comments
 route::post('/article/{post}' , 'CommentController@store')->name('comment.store');
-route::get('/article/{post}/edit', 'CommentController@edit')->name('comment.edit');
+route::get('/article/comments/{id}/edit', 'CommentController@edit')->name('comment.edit');
 route::patch('/article/{post}', 'CommentController@update')->name('comment.update');
-route::get('/article/{post}', 'CommentController@show')->name('comment.show');
+//route::get('/article/{post}', 'CommentController@show')->name('comment.show');
 route::DELETE('/article/{post}', 'PostController@destroy')->name('article.destroy');
 
 //articles
