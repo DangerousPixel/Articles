@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Comment;
+use App\Post;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -33,8 +34,16 @@ class CommentController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Comment $comment)
     {
+        $data = request() -> validate ([
+            'comment' => 'required | max:128' ,
+        ]);
+        auth()->user()->comment()->create([
+            'comment' => $data['comment'],
+        ]);
+
+        return redirect('/profile/{post}');
     }
 
     /**
@@ -43,8 +52,9 @@ class CommentController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show(Post $post , Comment $comment)
     {
+        return view('posts.show' , compact('comment' , 'post'));
     }
 
     /**
@@ -55,6 +65,7 @@ class CommentController extends Controller
      */
     public function edit(Comment $comment)
     {
+        return view('comments.edit' , compact('comment'));
     }
 
     /**
@@ -64,8 +75,14 @@ class CommentController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Post $post)
     {
+        $comment = request() -> validate ([
+            'comment' => 'required | max:128' ,
+        ]);
+        $comment->comment = request('comment');
+        $comment->save();
+        return redirect(route('article.show'  , compact('post')));
     }
 
     /**
@@ -74,8 +91,10 @@ class CommentController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($comment)
     {
-        //
+        Comment::find($comment)->delete();
+        $id = $this->post()->id;
+        return redirect()->route('article.show',$id);
     }
 }
