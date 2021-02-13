@@ -18,7 +18,7 @@
                 {{--        @enderror--}}
 
                 <div class="pt-3">
-                    <button class="btn btn-primary"> save changes</button>
+                    <button class="btn btn-primary btn-sm"> save changes</button>
                 </div>
 
             </div>

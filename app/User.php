@@ -37,6 +37,13 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function timeline()
+    {
+        $ids = User::all('id');
+        $ids = push($this->id);
+        return Post::whereIn('user_id',$ids)->latest()->get();
+    }
+
     public function profile()
     {
         return $this->hasOne(Profile::class);

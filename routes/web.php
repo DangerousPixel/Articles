@@ -19,22 +19,26 @@ Route::get('/', function () {
 });
 //authentication
 Auth::routes();
-//comments
-route::post('/article/{post}' , 'CommentController@store')->name('comment.store');
-route::get('/article/comments/{id}/edit', 'CommentController@edit')->name('comment.edit');
-route::patch('/article/{post}', 'CommentController@update')->name('comment.update');
-//route::get('/article/{post}', 'CommentController@show')->name('comment.show');
-route::DELETE('/article/{post}', 'PostController@destroy')->name('article.destroy');
 
 //articles
+
 route::post('/article', 'PostController@store')->name('article.store');
 route::get('/article/create', 'PostController@create')->name('article.create');
 route::get('/article/{post}/edit', 'PostController@edit')->name('article.edit');
 route::patch('/article/{post}', 'PostController@update')->name('article.update');
 route::get('/article/{post}', 'PostController@show')->name('article.show');
-Route::DELETE('/article/{post}', 'PostController@destroy')->name('article.destroy');
+route::delete('/article/{post}', 'PostController@destroy')->name('article.destroy');
+
+
+//comments
+route::post('/article/{post}/comment' , 'CommentController@store')->name('comment.store');
+route::get('/article/comments/{id}/edit', 'CommentController@edit')->name('comment.edit');
+route::patch('/article/comments/{id}', 'CommentController@update')->name('comment.update');
+route::delete('/article/comments/{id}' , 'CommentController@destroy')->name('comment.destroy');
+
+
 //profile
-Route::get('/home', 'ProfileController@index')->name('home');
+//Route::get('/home', 'ProfileController@index')->name('home');
 Route::get('/profile/{id}', 'ProfileController@index')->name('profile.show');
 Route::get('/profile/{user}/edit', 'ProfileController@edit')->name('profile.edit');
 Route::patch('/profile/{user}', 'ProfileController@update')->name('profile.update');

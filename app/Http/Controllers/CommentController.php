@@ -41,10 +41,12 @@ class CommentController extends Controller
         ]);
         $comment = new Comment();
         $comment->user_id = auth()->user()->id;
-        $comment->article_id = $post->id;
+        $comment->post_id = $post->id;
         $comment->comment = $data['comment'];
         $comment->save();
-        return redirect(route('article.show',$post));
+
+
+        return redirect(route('article.show',$post->id));
     }
 
     /**
@@ -64,8 +66,9 @@ class CommentController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Comment $comment)
+    public function edit( $id)
     {
+        $comment = Comment::findOrFail($id);
         return view('comments.edit' , compact('comment'));
     }
 
@@ -76,13 +79,15 @@ class CommentController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Post $post)
+    public function update(Request $request)
     {
-        $comment = request() -> validate ([
+        $data = request() -> validate ([
             'comment' => 'required | max:128' ,
         ]);
+        $comment = Comment::findOrFail($request->id);
         $comment->comment = request('comment');
         $comment->save();
+        $post = Post::findOrFail($comment->post_id);
         return redirect(route('article.show'  , compact('post')));
     }
 
@@ -92,10 +97,13 @@ class CommentController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($comment)
+    public function destroy($id)
     {
-        Comment::find($comment)->delete();
-        $id = $this->post()->id;
-        return redirect()->route('article.show',$id);
+        $comment = Comment::findOrFail($id);
+        $post_id = $comment->post_id;
+        $post= Post::findOrFail($post_id);
+        $comment->delete();
+        return redirect(route('article.show'  , compact('post')));
+
     }
 }
