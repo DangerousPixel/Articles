@@ -14,14 +14,16 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 //authentication
 Auth::routes();
 
+//home page
+//Route::get('/', function () {
+//    return view('welcome');
+//});
+Route::get('/', 'PostController@index' )->name('home.timeline');
 //articles
-
 route::post('/article', 'PostController@store')->name('article.store');
 route::get('/article/create', 'PostController@create')->name('article.create');
 route::get('/article/{post}/edit', 'PostController@edit')->name('article.edit');
