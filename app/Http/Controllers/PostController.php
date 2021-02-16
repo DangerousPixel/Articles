@@ -49,7 +49,7 @@ class PostController extends Controller
             'article' => $data['article'] ,
         ]);
 
-        return redirect('/profile/'.auth()->user()->id);
+        return redirect('/profile/'.auth()->user()->id) ;
     }
 
     /**
