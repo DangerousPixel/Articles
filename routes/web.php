@@ -19,10 +19,8 @@ use Illuminate\Support\Facades\Auth;
 Auth::routes();
 
 //home page
-//Route::get('/', function () {
-//    return view('welcome');
-//});
 Route::get('/', 'PostController@index' )->name('home.timeline');
+
 //articles
 route::post('/article', 'PostController@store')->name('article.store');
 route::get('/article/create', 'PostController@create')->name('article.create');
