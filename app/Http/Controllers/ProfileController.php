@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Profile;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
@@ -35,9 +36,10 @@ class ProfileController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(User $user)
     {
-        //
+        $this->authorize('update', $user->profile);
+
     }
 
     /**
@@ -59,8 +61,6 @@ class ProfileController extends Controller
      */
     public function edit(User $user)
     {
-       // $this->authorize('update', $user->profile);
-
         return view('profiles.edit', compact('user'));
     }
 
@@ -80,6 +80,7 @@ class ProfileController extends Controller
         //$post->update($data);
         $user->save();
         return redirect(route('profile.show'  , compact('user')));
+
     }
 
     /**

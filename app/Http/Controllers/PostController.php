@@ -31,8 +31,9 @@ class PostController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Http\Response|\Illuminate\View\View
      */
-    public function create()
+    public function create(User $user)
     {
+        $user = Auth::user() ?? abort(403);
         return view('posts.create');
 
     }
@@ -43,7 +44,7 @@ class PostController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(User $user)
     {
         $data = request()->validate([
             'title' => 'required',
@@ -74,7 +75,7 @@ class PostController extends Controller
      * @param \App\Post $post
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit()
     {
         return view('posts.edit', compact('post'));
 
