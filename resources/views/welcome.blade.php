@@ -11,10 +11,10 @@
             <div class="font-weight-bold align-content-md-center">
         <div class="card">
             <div class="card-header">  <a href="{{route('profile.show', $post->user->id)}}"> {{$post->user->username}}</a>
-                <p class="d-inline-block font-weight-lighter text-secondary"> created at {{$post->created_at}}</p>
-                <a class="btn-success badge-success btn-sm d-inline pull-right" href="{{ route('article.edit' ,$post)}}">⋮
-                    edit</a> <br>
-                <p class="font-weight-bold d-inline-block text-secondary" style="color: #5a6268"> Title:   {{$post->title}} </p>
+                <p class="d-inline-block font-weight-lighter text-secondary pull-right"> {{$post->created_at}}</p>
+{{--                <a class="btn-success badge-success btn-sm d-inline pull-right" href="{{ route('article.edit' ,$post)}}">⋮--}}
+{{--                    edit</a>--}}
+                <p class="font-weight-bold d-inline-block text-secondary" style="color: #5a6268"> ⋮   {{$post->title}} </p>
             </div>
             <div class="card-body">
 

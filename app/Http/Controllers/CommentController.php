@@ -13,6 +13,11 @@ class CommentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth')->except( 'show');
+    }
+
     public function index()
     {
         //
@@ -69,6 +74,11 @@ class CommentController extends Controller
     public function edit( $id)
     {
         $comment = Comment::findOrFail($id);
+        if (auth()->user()->id !== $comment->user_id){
+            return abort(403);
+        }
+
+
         return view('comments.edit' , compact('comment'));
     }
 

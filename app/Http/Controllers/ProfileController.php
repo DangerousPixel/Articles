@@ -14,6 +14,12 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth')->except('index');
+    }
+
     public function index($id)
     {
         $user= User::where('id',$id)->firstOrFail();  //looking for id in users table and return the first found result
@@ -61,6 +67,9 @@ class ProfileController extends Controller
      */
     public function edit(User $user)
     {
+        if (auth()->user()->id !== $user->profile->id) {
+            return abort(403);
+        }
         return view('profiles.edit', compact('user'));
     }
 

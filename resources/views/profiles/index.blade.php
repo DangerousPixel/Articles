@@ -9,7 +9,13 @@
                 <div class="card">
                     <div class="card-header">
                         <div style="font-weight: bold"> {{ $user->username }} ⋮ have {{$user->posts->count()}} posts
-                            <div class="a"><a href="{{route('profile.edit',$user)}}"> edit profile</a></div>
+                            <div class="a">
+                                @auth
+                                    @if( auth()->user()->id == $user->profile->id )
+                                    <a href="{{route('profile.edit',$user)}}"> edit profile</a>
+                                    @endif
+                                @endauth
+                            </div>
                         </div>
                     </div>
                     <div class="card-body">
@@ -21,7 +27,8 @@
                         <p> {{$user->profile->bio ?? null}}  </p>
                     </div>
                 </div>
-                <div class=" pull-right font-weight-bold"><a href="{{route('article.create')}}"> Post New Article </a>
+                <div class=" pull-right font-weight-bold"> @auth <a href="{{route('article.create')}}"> Post New
+                        Article </a> @endauth
                 </div>
                 <div class="pull-left font-weight-bold align-content-md-center ">
                     <a href="{{route('home.timeline')}}">Public Timeline</a>
@@ -33,13 +40,16 @@
                 @foreach($user->posts as $post)
                     <div class="card font-weight-bold">
                         <div class="card-header"><a href="{{route('profile.show',$user)}}">{{$user->username}}</a>
-                            <a class="btn-success badge-success btn-sm d-inline pull-right"
-                               href="{{route('article.edit' ,$post)}}">⋮ edit</a><br>
-                            <h6 style="color: #5a6268"> Title: {{$post->title}} </h6>
+                            @auth
+                                @if( auth()->user()->id== $post->user_id)
+                                <a class="btn-success badge-success btn-sm d-inline-block pull-right"
+                                   href="{{route('article.edit' ,$post)}}">⋮ edit</a>
+                                @endif
+                            @endauth
+                            <p class="d-inline-block" style="color: #5a6268"> ⋮ {{$post->title}} </p>
 
                         </div>
                         <div class="card-body font-weight-bold">
-
                             <p>{{$post->article}}</p>
                             <div class="show-article text-md-right">
                                 <a href="{{route('article.show',$post)}}"> show article </a>
