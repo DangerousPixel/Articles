@@ -5,7 +5,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <h3 class="text-secondary text-center">   {{$user->username}}'s Profile </h3>
+                <h3 class="text-secondary text-center">   {{$user->name}}'s Profile </h3>
                 <div class="card">
                     <div class="card-header">
                         <div style="font-weight: bold"> {{ $user->username }} ⋮ have {{$user->posts->count()}} posts

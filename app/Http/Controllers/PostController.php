@@ -75,7 +75,7 @@ class PostController extends Controller
      * @param \App\Post $post
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit(Post $post)
     {
         return view('posts.edit', compact('post'));
 

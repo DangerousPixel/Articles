@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
-        <form class="d-inline" action="{{route('article.update' , $post)}}" enctype="multipart/form-data" method="post">
+        <form class="d-inline" action="{{ route('article.update' , $post) }}" enctype="multipart/form-data" method="post">
             {{ csrf_field() }}
             {{ method_field('PATCH') }}
 
