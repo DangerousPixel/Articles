@@ -27,11 +27,11 @@
                         <p> {{$user->profile->bio ?? null}}  </p>
                     </div>
                 </div>
-                <div class=" pull-right font-weight-bold"> @auth <a href="{{route('article.create')}}"> Post New
+                <div class=" pull-right font-weight-bold"> @auth <a class=" mt-1 mr-3 btn btn-dark" href="{{route('article.create')}}"> Post New
                         Article </a> @endauth
                 </div>
-                <div class="pull-left font-weight-bold align-content-md-center ">
-                    <a href="{{route('home.timeline')}}">Public Timeline</a>
+                <div class=" pull-left font-weight-bold align-content-md-center ">
+                    <a class="mt-1 ml-3 btn btn-dark" href="{{route('home.timeline')}}">Public Timeline</a>
 
                 </div>
             </div>

@@ -29,6 +29,9 @@ route::patch('/article/{post}', 'PostController@update')->name('article.update')
 route::get('/article/{post}', 'PostController@show')->name('article.show');
 route::delete('/article/{post}', 'PostController@destroy')->name('article.destroy');
 
+//tags
+Route::get('/tags/{tag}', 'TagController@index')->name('tags.show');
+
 
 //comments
 route::post('/article/{post}/comment' , 'CommentController@store')->name('comment.store');

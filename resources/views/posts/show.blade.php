@@ -10,6 +10,17 @@
                 <p class="d-inline-block text-secondary pull-right">{{$post->created_at}}</p></div>
             <div class="card-body">
                 <p>{{$post->article}}</p>
+                <hr class="mt-2 mb-3"/>
+                <div class="d-inline-block">
+                    @if (count($post->tags))
+                        Tags:
+                        @foreach ($post->tags as $tag)
+                            <a href="{{route('tags.show' ,$tag->name)}}">{{$tag->name}}</a>
+                        @endforeach
+                    @endif
+
+                </div>
+
                 @auth
                     @if( auth()->user()->id==$post->user_id)
                     <a class="btn-success badge-success btn-sm d-inline pull-right"
