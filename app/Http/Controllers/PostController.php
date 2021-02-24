@@ -35,13 +35,14 @@ class PostController extends Controller
     /**
      * Show the form for creating a new resource.
      *
+     * @param User $user
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Http\Response|\Illuminate\View\View
      */
-    public function create(User $user)
+    public function create()
     {
+        $tags = Tag::all();
         $user = Auth::user() ?? abort(403);
-        return view('posts.create');
-
+        return view('posts.create' , compact('tags'));
     }
 
     /**
@@ -50,16 +51,24 @@ class PostController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(User $user)
+    public function store(Request $request , User $user)
     {
+
         $data = request()->validate([
             'title' => 'required',
             'article' => 'required',
+            'tags.*' => 'nullable|integer',
+
         ]);
-        auth()->user()->posts()->create([
-            'title' => $data['title'],
-            'article' => $data['article'],
-        ]);
+
+
+        $post = new Post();
+        $post->title = $data['title'];
+        $post->article = $data['article'];
+        $post->user_id = auth()->user()->id;
+        $post->save();
+        $post->tags()->attach(request('tags'));
+
 
         return redirect('/profile/' . auth()->user()->id);
     }
@@ -118,9 +127,9 @@ class PostController extends Controller
      */
     public function destroy($post)
     {
-        if (auth()->user()->id !== $post->user_id){
-            return abort(403);
-        }
+//        if (auth()->user()->id !== $post->user_id){
+//            return abort(403);
+//        }
         Post::find($post)->delete();
         $id = auth()->user()->id;
         return redirect()->route('profile.show', $id);

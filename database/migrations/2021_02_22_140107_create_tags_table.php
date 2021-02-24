@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Fluent ;
 
 class CreateTagsTable extends Migration
 {
@@ -14,15 +15,22 @@ class CreateTagsTable extends Migration
     public function up()
     {
         Schema::create('tags', function (Blueprint $table) {
-            $table->increments('id');
-            $table->String('name')->unique();
+            $table->Increments('id');
+            $table->String('name');
             $table->timestamps();
         });
 
         Schema::create('post_tag', function (Blueprint $table) {
-            $table->integer('post_id');
-            $table->integer('tag_id');
-            $table->primary(['post_id', 'tag_id']);
+            $table->bigIncrements('id');
+            $table->integer('post_id')->unsigned();
+            $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
+            $table->integer('tag_id')->unsigned();
+            $table->foreign('tag_id')->references('id')->on('tags')->onDelete('cascade');
+
+            $table->Timestamps();
+
+            $table->unique(['post_id', 'tag_id']);
+
         });
     }
 

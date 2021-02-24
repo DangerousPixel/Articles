@@ -13,9 +13,10 @@
                 <hr class="mt-2 mb-3"/>
                 <div class="d-inline-block">
                     @if (count($post->tags))
-                        Tags:
+                        <p class="d-inline-block font-weight-bold"> Tags:</p>
                         @foreach ($post->tags as $tag)
-                            <a href="{{route('tags.show' ,$tag->name)}}">{{$tag->name}}</a>
+                            <a href="{{route('tags.show' ,$tag->name)}}">{{$tag->name}} </a>
+                            ,
                         @endforeach
                     @endif
 
