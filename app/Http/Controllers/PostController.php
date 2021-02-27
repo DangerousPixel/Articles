@@ -51,7 +51,7 @@ class PostController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request , User $user)
+    public function store(Request $request)
     {
 
         $data = request()->validate([
@@ -80,8 +80,11 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Post $post)
+
     {
-        return view('posts.show', compact('post'));
+        $tags = Tag::all();
+        $postags = $post->tags()->pluck('name')->toArray();
+        return view('posts.show', compact('post' , 'postags'));
     }
 
     /**
@@ -90,12 +93,17 @@ class PostController extends Controller
      * @param \App\Post $post
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit(Post $post , Request $request)
     {
         if (auth()->user()->id !== $post->user_id){
         return abort(403);
         }
-        return view('posts.edit', compact('post'));
+
+        $tags = Tag::all();
+        $postags = $post->tags()->pluck('name')->toArray();
+       // $post->tags()->detach(request('tags'));
+        //dd($postags);
+        return view('posts.edit', compact('post' , 'tags' , 'postags'));
 
 
     }
@@ -109,13 +117,24 @@ class PostController extends Controller
      */
     public function update(Post $post)
     {
+
         $data = request()->validate([
             'title' => 'required',
             'article' => 'required',
+            'tags' => ''
         ]);
         $post->title = request('title');
         $post->article = request('article');
+        $post->user_id = auth()->user()->id;
         $post->save();
+        if (request()->has('tags')) {
+            $post->tags()->attach(request('tags'));
+        }else{
+            $post->tags()->detach(request('tags'));
+        }
+        $post->save();
+
+
         return redirect(route('article.show', compact('post')));
     }
 

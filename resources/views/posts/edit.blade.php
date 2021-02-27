@@ -44,6 +44,25 @@
                     @endif
                 </div>
 
+                {{--tags edit --}}
+                <div class="form-group row">
+
+                    @foreach($tags as $tag)
+                        <div class="form-check form-check-inline">
+                            {{--                            <input class="form-check-input" type="checkbox" name="tags[]" id="inlineCheckbox1"--}}
+                            {{--                                   value="{{ old('tags') ?? $post->tags }}">--}}
+                            {{--                            <label class="form-check-label" for="inlineCheckbox1">{{$tag->name}}</label>--}}
+
+                                <label class="checkbox-inline">
+                                 <input type="checkbox" name="tags[]" value="{{$tag->id}}"
+                                 @if (in_array($tag->name, $postags)) {{"checked"}} @endif/>
+                                    {{$tag->name}} </label>
+
+                        </div>
+                    @endforeach
+                </div>
+
+
             </div>
             <button class="btn btn-primary btn-sm offset-2">save changes</button>
 
