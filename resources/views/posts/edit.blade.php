@@ -67,6 +67,7 @@
             <button class="btn btn-primary btn-sm offset-2">save changes</button>
 
         </form>
+
         <form method="POST" class="d-inline ml-3 align-content-center" action="{{route('article.show' , $post)}}">
             {{method_field('DELETE')}}
             {{ @csrf_field() }}

@@ -64,6 +64,11 @@
                     <textarea class="d-flex" name="comment" id="comment" cols="130" rows="2"
                               placeholder=" Type a comment ..."> </textarea>
                     <input type="submit" class="btn btn-primary btn-sm mt-1 " value="reply"><br>
+                    @if ($errors->has('comment'))
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $errors->first('comment') }}</strong>
+                        </span>
+                    @endif
 
                 @endauth
             </form>

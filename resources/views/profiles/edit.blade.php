@@ -11,7 +11,11 @@
                        class="form-control @error ('bio') is-invalid @enderror"
                        name="bio" value="{{ old('bio') ?? $user->profile->bio}}"
                        required autocomplete="bio" autofocus>
-
+                @if ($errors->has('bio'))
+                    <span class="invalid-feedback" role="alert">
+                            <strong>{{ $errors->first('bio') }}</strong>
+                        </span>
+                @endif
                 {{--        @error('bio')--}}
                 {{--        <span class="invalid-feedback" role="alert">--}}
                 {{--                            <strong>{{ $errors->first('bio') }}</strong> </span>--}}

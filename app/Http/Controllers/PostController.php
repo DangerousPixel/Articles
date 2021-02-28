@@ -55,7 +55,7 @@ class PostController extends Controller
     {
 
         $data = request()->validate([
-            'title' => 'required',
+            'title' => 'required | max:32',
             'article' => 'required',
             'tags.*' => 'nullable|integer',
 
@@ -119,7 +119,7 @@ class PostController extends Controller
     {
 
         $data = request()->validate([
-            'title' => 'required',
+            'title' => 'required | max:32',
             'article' => 'required',
             'tags' => ''
         ]);
@@ -151,6 +151,6 @@ class PostController extends Controller
 //        }
         Post::find($post)->delete();
         $id = auth()->user()->id;
-        return redirect()->route('profile.show', $id);
+        return redirect()->route('profile.show', $id)->with('success' , 'Deleted Successfully!');;
     }
 }

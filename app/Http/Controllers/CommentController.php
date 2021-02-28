@@ -113,7 +113,8 @@ class CommentController extends Controller
         $post_id = $comment->post_id;
         $post= Post::findOrFail($post_id);
         $comment->delete();
-        return redirect(route('article.show'  , compact('post')));
+        session()->flash('success' , 'Deleted Successfully!');
+        return redirect(route('article.show'  , compact('post')))->with('success', 'Deleted successfully!');
 
     }
 }

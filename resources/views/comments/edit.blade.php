@@ -23,6 +23,7 @@
             <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">
                  Delete
             </button>
+            @include('flash::message')
         </form>
     </div>
 @endsection
