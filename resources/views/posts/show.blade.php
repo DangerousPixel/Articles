@@ -3,6 +3,9 @@
     @method('PUT')
 
     <div class="container">
+        @if (Session::has('success'))
+            <div class="alert alert-info">{{ Session::get('success') }}</div>
+        @endif
         <div class="card">
             <div class="card-header">
                 <a class="font-weight-bold"

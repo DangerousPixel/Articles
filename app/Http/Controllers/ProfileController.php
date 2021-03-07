@@ -6,7 +6,7 @@ use App\Profile;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Session;
 class ProfileController extends Controller
 {
     /**
@@ -88,6 +88,8 @@ class ProfileController extends Controller
         $user->bio = request('bio');
         //$post->update($data);
         $user->save();
+        Session::flash('success', "Profile Updated successfully!");
+
         return redirect(route('profile.show'  , compact('user')));
 
     }

@@ -10,6 +10,7 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Session;
 
 class PostController extends Controller
 {
@@ -68,6 +69,7 @@ class PostController extends Controller
         $post->user_id = auth()->user()->id;
         $post->save();
         $post->tags()->attach(request('tags'));
+        Session::flash('success', "Post Created successfully!");
 
 
         return redirect('/profile/' . auth()->user()->id);
@@ -133,6 +135,7 @@ class PostController extends Controller
             $post->tags()->detach(request('tags'));
         }
         $post->save();
+        Session::flash('success', "Post edited successfully!");
 
 
         return redirect(route('article.show', compact('post')));
@@ -151,6 +154,7 @@ class PostController extends Controller
 //        }
         Post::find($post)->delete();
         $id = auth()->user()->id;
-        return redirect()->route('profile.show', $id)->with('success' , 'Deleted Successfully!');;
+        Session::flash('success', "Post deleted successfully!");
+        return redirect()->route('profile.show', $id);
     }
 }

@@ -1,6 +1,9 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
+        @if (Session::has('success'))
+            <div class="alert alert-info">{{ Session::get('success') }}</div>
+        @endif
         <form action="{{route('profile.update' , $user)}}" enctype="multipart/form-data" method="post">
             {{ csrf_field() }}
             {{ method_field('PATCH') }}

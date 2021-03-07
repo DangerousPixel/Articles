@@ -3,6 +3,9 @@
 @section('content')
     @method('PUT')
     <div class="container">
+        @if (Session::has('success'))
+            <div class="alert alert-info">{{ Session::get('success') }}</div>
+        @endif
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <h3 class="text-secondary text-center">   {{$user->name}}'s Profile </h3>
@@ -27,14 +30,16 @@
                         <p> {{$user->profile->bio ?? null}}  </p>
                     </div>
                 </div>
-                <div class=" pull-right font-weight-bold"> @auth
-                        <a class=" mt-1 mr-3 badge badge-dark" href="{{route('article.create')}}">
-                            Post New Article </a>
+
+                <div class=" pull-right"> @auth
+                        <div class="font-weight-bold mr-3">
+                            <a href="{{route('article.create')}}" class="mt-1 ml-3 badge badge-info"> <p class="p-2 m-auto" style="color: white">Post New Article</p> </a>
+                        </div>
                     @endauth
                 </div>
-                <div class=" pull-left font-weight-bold align-content-md-center ">
-                    <a class="mt-1 ml-3 badge badge-dark" href="{{route('home.timeline')}}">Public Timeline</a>
 
+                <div class="pull-left font-weight-bold align-content-md-center ">
+                    <a href="{{route('home.timeline')}}" class="mt-1 ml-3 badge badge-info"> <p class="p-2 m-auto" style="color: white">Public Timeline</p> </a>
                 </div>
             </div>
 

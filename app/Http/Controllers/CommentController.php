@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Comment;
 use App\Post;
 use Illuminate\Http\Request;
-
+use Session;
 class CommentController extends Controller
 {
     /**
@@ -113,8 +113,8 @@ class CommentController extends Controller
         $post_id = $comment->post_id;
         $post= Post::findOrFail($post_id);
         $comment->delete();
-        session()->flash('success' , 'Deleted Successfully!');
-        return redirect(route('article.show'  , compact('post')))->with('success', 'Deleted successfully!');
+        Session::flash('success', "Comment deleted successfully!");
+        return redirect(route('article.show'  , compact('post')));
 
     }
 }
